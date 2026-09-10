@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spar — the co-founder who argues with your idea first</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EAE7DD;
+    --paper-dark: #DDD7C6;
+    --ink: #1E2027;
+    --ink-soft: #55575F;
+    --stamp: #A93226;
+    --pen: #2F6F62;
+    --rule: #C7BFA9;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Serif', serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    line-height:1.1;
+    margin:0;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+  }
+  a{color:var(--pen);}
+  .wrap{
+    max-width:960px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  .rule{
+    border:none;
+    border-top:1px solid var(--rule);
+    margin:0;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    padding:28px 0 0;
+  }
+  .header-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding-bottom:20px;
+    border-bottom:1px solid var(--rule);
+  }
+  .wordmark{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:22px;
+    letter-spacing:-0.01em;
+  }
+  .wordmark em{
+    font-style:italic;
+    color:var(--stamp);
+  }
+  .file-no{
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:64px 0 40px;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:56px;
+    align-items:start;
+  }
+  .hero h1{
+    font-size:46px;
+    max-width:11ch;
+  }
+  .hero .lede{
+    margin-top:22px;
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:46ch;
+  }
+  .signup{
+    margin-top:30px;
+    display:flex;
+    gap:0;
+    max-width:440px;
+    border:1px solid var(--ink);
+  }
+  .signup input{
+    flex:1;
+    border:none;
+    background:transparent;
+    padding:14px 16px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    color:var(--ink);
+    outline:none;
+  }
+  .signup input::placeholder{color:#8A8C7F;}
+  .signup button{
+    border:none;
+    border-left:1px solid var(--ink);
+    background:var(--ink);
+    color:var(--paper);
+    padding:14px 20px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .signup button:hover{background:#33353E;}
+  .signup-note{
+    margin-top:10px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .form-msg{
+    margin-top:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--pen);
+    display:none;
+  }
+
+  /* ---------- transcript card ---------- */
+  .card{
+    background:var(--paper-dark);
+    border:1px solid var(--rule);
+    padding:22px 24px;
+    position:relative;
+    box-shadow: 4px 4px 0 rgba(30,32,39,0.08);
+  }
+  .card-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+  }
+  .line{
+    margin-bottom:14px;
+    font-size:15px;
+  }
+  .who{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-bottom:3px;
+    display:block;
+  }
+  .who.spar{color:var(--pen);}
+  .stamp{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:500;
+    font-size:13px;
+    color:var(--stamp);
+    border:2px solid var(--stamp);
+    padding:5px 10px;
+    transform:rotate(-4deg);
+    margin-top:10px;
+    animation: stamp-in 0.5s cubic-bezier(.2,.9,.3,1.3) 0.3s both;
+  }
+  @keyframes stamp-in{
+    0%{ opacity:0; transform:rotate(-4deg) scale(1.6); }
+    100%{ opacity:1; transform:rotate(-4deg) scale(1); }
+  }
+  .verdict{
+    margin-top:12px;
+    font-size:14px;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+
+  /* ---------- sections ---------- */
+  section{
+    padding:56px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  section h2{
+    font-size:30px;
+    max-width:20ch;
+    margin-bottom:18px;
+  }
+  .section-lede{
+    max-width:56ch;
+    color:var(--ink-soft);
+    font-size:16px;
+  }
+
+  .crossed{
+    text-decoration: line-through;
+    text-decoration-color: var(--stamp);
+    text-decoration-thickness: 1.5px;
+    color:#8A8C7F;
+  }
+
+  /* ---------- stages log ---------- */
+  .log{
+    margin-top:36px;
+  }
+  .log-entry{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:24px;
+    padding:22px 0;
+    border-top:1px solid var(--rule);
+  }
+  .log-entry:last-child{border-bottom:1px solid var(--rule);}
+  .log-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--stamp);
+    padding-top:3px;
+  }
+  .log-body h3{
+    font-size:19px;
+    font-weight:500;
+    margin-bottom:6px;
+  }
+  .log-body p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:15px;
+    max-width:58ch;
+  }
+
+  /* ---------- manifesto ---------- */
+  .manifesto-grid{
+    margin-top:32px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:36px 48px;
+  }
+  .manifesto-item h3{
+    font-size:17px;
+    font-weight:500;
+    margin-bottom:8px;
+  }
+  .manifesto-item p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:15px;
+  }
+
+  /* ---------- final CTA ---------- */
+  .cta{
+    padding:64px 0 48px;
+    border-bottom:none;
+  }
+  .cta-inner{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .cta h2{max-width:14ch;}
+  .honesty-note{
+    margin-top:16px;
+    font-size:14px;
+    color:var(--ink-soft);
+    border-left:2px solid var(--pen);
+    padding-left:14px;
+    max-width:42ch;
+  }
+
+  footer{
+    padding:28px 0 40px;
+    display:flex;
+    justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width: 800px){
+    .hero{grid-template-columns:1fr; gap:40px;}
+    .hero h1{font-size:34px; max-width:none;}
+    .manifesto-grid{grid-template-columns:1fr;}
+    .cta-inner{grid-template-columns:1fr;}
+    .log-entry{grid-template-columns:1fr; gap:6px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .stamp{animation:none;}
+  }
+
+  :focus-visible{
+    outline:2px solid var(--pen);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="header-row">
+      <div class="wordmark">Spar<em>.</em></div>
+      <div class="file-no mono">CASE FILE — OPEN</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero" style="border-bottom:none;">
+    <div>
+      <h1>Most ideas don't survive the first honest question.</h1>
+      <p class="lede">Spar is the co-founder who asks it anyway — then sticks around to help you validate, scope, and build the thing that's actually worth shipping.</p>
+
+      <form class="signup" id="signupForm">
+        <input type="email" id="emailInput" placeholder="you@yourdomain.com" required aria-label="Email address">
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="signup-note">No spam. One email when the first version opens up.</p>
+      <p class="form-msg" id="formMsg">You're on the list. We'll be in touch.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">TRANSCRIPT — SESSION 001</div>
+      <div class="line">
+        <span class="who">YOU</span>
+        I want to build an app that helps people track their habits.
+      </div>
+      <div class="line">
+        <span class="who spar">SPAR</span>
+        There are already thousands of habit trackers. What do you know about this problem that they don't?
+      </div>
+      <div class="line">
+        <span class="who">YOU</span>
+        ...I'm not sure yet.
+      </div>
+      <div class="stamp">NOT YET</div>
+      <div class="verdict">Verdict: sharpen who this is for before touching what it does.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker mono">THE PROBLEM</div>
+    <h2>You don't need more tools. You need someone who'll argue with you.</h2>
+    <p class="section-lede">A code generator writes what you ask for. A designer builds what you describe. Nobody in the loop is asking whether it should exist at all — so most first products end up <span class="crossed">stuffed with features nobody asked for</span> instead of narrow, sharp, and shippable.</p>
+  </section>
+
+  <section>
+    <div class="kicker mono">HOW IT WORKS</div>
+    <h2>One collaborator, six stages, no handoffs.</h2>
+    <p class="section-lede">Spar stays with the idea from the first doubt to the first user, and remembers every decision in between — including why you made it.</p>
+
+    <div class="log">
+      <div class="log-entry">
+        <div class="log-tag">01 — IDEATION</div>
+        <div class="log-body">
+          <h3>Sharpen the fuzzy version</h3>
+          <p>Spar asks who the user is, what actually hurts, and whether this needs to exist — until the idea fits in one honest sentence.</p>
+        </div>
+      </div>
+      <div class="log-entry">
+        <div class="log-tag">02 — VALIDATION</div>
+        <div class="log-body">
+          <h3>Test demand before you code</h3>
+          <p>Drafts the landing page, the outreach message, or the survey that tells you if anyone actually wants this — and reads the results straight, good or bad.</p>
+        </div>
+      </div>
+      <div class="log-entry">
+        <div class="log-tag">03 — SCOPING</div>
+        <div class="log-body">
+          <h3>Cut it down on purpose</h3>
+          <p>Pushes back on the extra features and finds the smallest version that's still worth building — this is where most founders overbuild, and where Spar earns its keep.</p>
+        </div>
+      </div>
+      <div class="log-entry">
+        <div class="log-tag">04 — BUILDING</div>
+        <div class="log-body">
+          <h3>Ship the actual thing</h3>
+          <p>Writes the code, the UI, and the architecture for the MVP — not a description of how you'd build it.</p>
+        </div>
+      </div>
+      <div class="log-entry">
+        <div class="log-tag">05 — LAUNCH</div>
+        <div class="log-body">
+          <h3>Get it in front of people</h3>
+          <p>Drafts the landing page, onboarding, and first messages so your earliest users understand what this is in one glance.</p>
+        </div>
+      </div>
+      <div class="log-entry">
+        <div class="log-tag">06 — ITERATION</div>
+        <div class="log-body">
+          <h3>Decide what's signal</h3>
+          <p>Reads feedback and usage patterns with you, and helps separate what to fix now from what to ignore for six months.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker mono">WHY IT'S NOT JUST ANOTHER ASSISTANT</div>
+    <h2>A tool executes. A co-founder has an opinion.</h2>
+    <div class="manifesto-grid">
+      <div class="manifesto-item">
+        <h3>It remembers the whole arc</h3>
+        <p>Not just the last message — the idea, the decisions you made, and why you made them, weeks later.</p>
+      </div>
+      <div class="manifesto-item">
+        <h3>It pushes back</h3>
+        <p>If the idea's shaky or the scope is bloated, Spar says so before you spend a weekend building it.</p>
+      </div>
+      <div class="manifesto-item">
+        <h3>It produces, not just advises</h3>
+        <p>Code, copy, mockups — real artifacts you can ship, not a to-do list for you to execute later.</p>
+      </div>
+      <div class="manifesto-item">
+        <h3>It stays through the awkward middle</h3>
+        <p>The gap between "I have an idea" and "people are using it" is where most solo builders stall. That's the part Spar is built for.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-inner">
+      <div>
+        <h2>If this is worth building, you're the reason we'll know.</h2>
+        <p class="honesty-note">This page is the test. We're checking whether enough people want a co-founder like this before we build one — same discipline Spar would push on you.</p>
+      </div>
+      <div>
+        <form class="signup" id="signupForm2">
+          <input type="email" id="emailInput2" placeholder="you@yourdomain.com" required aria-label="Email address">
+          <button type="submit">Join the waitlist</button>
+        </form>
+        <p class="signup-note">First cohort gets early access and a say in what gets built first.</p>
+        <p class="form-msg" id="formMsg2">You're on the list. We'll be in touch.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>Spar — a co-founder, not a to-do list.</span>
+    <span>Case file remains open.</span>
+  </div>
+</footer>
+
+<script>
+  function wireForm(formId, inputId, msgId){
+    const form = document.getElementById(formId);
+    const msg = document.getElementById(msgId);
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      // NOTE: this is a demand-test stub. Wire this up to a real
+      // waitlist provider (e.g. a Google Form, Mailchimp, or a
+      // simple serverless endpoint) to actually capture emails.
+      form.style.display = 'none';
+      msg.style.display = 'block';
+    });
+  }
+  wireForm('signupForm', 'emailInput', 'formMsg');
+  wireForm('signupForm2', 'emailInput2', 'formMsg2');
+</script>
+
+</body>
+</html>
